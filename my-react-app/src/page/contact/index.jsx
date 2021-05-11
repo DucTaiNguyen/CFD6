@@ -1,89 +1,100 @@
 import PopupLogin from '../../component/PopupLogin'
 import React, { useState } from 'react'
+import useFormValidate from '../../hook/useFormValidate'
 export default function Contact() {
 
 
-    // let [name, setName] = useState('')
-    // let [phone, setPhone] = useState('')
-    // let [email, setEmail] = useState('')
-    // let [name, setName] = useState('')
-    let [form, setForm] = useState({
+    // // let [name, setName] = useState('')
+    // // let [phone, setPhone] = useState('')
+    // // let [email, setEmail] = useState('')
+    // // let [name, setName] = useState('')
+    // let [form, setForm] = useState({
+    //     name: '',
+    //     phone: '',
+    //     email: '',
+    //     website: '',
+    //     title: '',
+    //     content: ''
+    // })
+
+    // let [error, setError] = useState({
+    //     name: '',
+    //     phone: '',
+    //     email: '',
+    //     website: '',
+    //     title: '',
+    //     content: ''
+    // })
+
+
+    let { form, error, inputChange, check } = useFormValidate({
         name: '',
         phone: '',
         email: '',
         website: '',
         title: '',
         content: ''
+    }, {
+        rule: {
+            name: {
+                required: true
+            },
+            phone: {
+                required: true,
+                pattern: 'phone'
+            },
+            email: {
+                required: true,
+                pattern: 'email'
+            },
+            website: {
+
+                pattern: 'url'
+            },
+            title: {
+                required: true,
+
+            },
+            content: {
+                required: true,
+                // pattern: 'content'
+            }
+
+        },
+        message: {
+            name: {
+                required: "Họ và tên không được đẻ trống"
+            },
+            phone: {
+                required: 'Số điện thoại không được để trống',
+                pattern: 'Phải là số điện thoại Việt Nam'
+
+            },
+            website: {
+                pattern: "Phải là link facebook"
+            }
+        }
     })
 
-    let [error, setError] = useState({
-        name: '',
-        phone: '',
-        email: '',
-        website: '',
-        title: '',
-        content: ''
-    })
+
     function onSubmit() {
-        // form.name.trim().replace(/ +/g, ' ')
-        let objTemp = {}
-        let errorObj = {}
-        if (!form.name.trim()) {
-            errorObj.name = "Name bắt buộc"
-
-        }
-
-        if (!form.phone.trim()) {
-            errorObj.phone = "Phone bắt buộc"
-
-        }
-        if (!/(\+84|0)+(3[2-9]|5[6|8|9]|9\d(?!5)|8[1-9]|7[0|6-9])+([0-9]{7})\b/.test(form.phone)) {
-            errorObj.phone = "Phone không đúng định dạng"
-
-
-        }
-        if (!form.email.trim()) {
-            errorObj.email = "Email bắt buộc"
-
-        } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(form.email)) {
-            errorObj.email = "Email không đúng định dạng"
-
-
-        }
-
-
-        if (form.website.trim() && !/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(form.website.trim())) {
-            errorObj.website = "Website không đúng định dạng"
-
-
-        }
-
-        if (!form.title.trim()) {
-            errorObj.title = "Title bắt buộc"
-
-        }
-        if (!form.content.trim()) {
-            errorObj.content = "Content bắt buộc"
-
-        }
+        let errorObj = check();
         if (Object.keys(errorObj).length === 0) {
             console.log(form)
-        } else {
-            setError(errorObj)
         }
 
     }
 
-    function inputOnChange(e) {
-        let name = e.target.name
-        let value = e.target.value
+    // function inputOnChange(e) {
+    //     let name = e.target.name
+    //     let value = e.target.value
 
-        setForm({
-            ...form,
-            [name]: value
-        })
+    //     setForm({
+    //         ...form,
+    //         [name]: value
+    //     })
 
-    }
+    // }
 
     return (
         <main className="register-course" id="main">
@@ -94,45 +105,46 @@ export default function Contact() {
                     Đừng ngần ngại liên hệ với <strong>CFD</strong> để cùng nhau tạo ra những sản phẩm giá trị, cũng như
             việc hợp tác với các đối tác tuyển dụng và công ty trong và ngoài nước.
           </p>
+                <PopupLogin />
                 <div className="form">
                     <label>
                         <p>Họ và tên<span>*</span></p>
-                        <input value={form.name} name='name' onChange={inputOnChange} type="text" placeholder="Họ và tên bạn" />
+                        <input value={form.name} name='name' onChange={inputChange} type="text" placeholder="Họ và tên bạn" />
                         {
                             error.name && <p className="error-text">{error.name} </p>
                         }
                     </label>
                     <label>
                         <p>Số điện thoại</p>
-                        <input value={form.phone} name='phone' onChange={inputOnChange} type="text" placeholder="Số điện thoại" />
+                        <input value={form.phone} name='phone' onChange={inputChange} type="text" placeholder="Số điện thoại" />
                         {
                             error.phone && <p className="error-text">{error.phone} </p>
                         }
                     </label>
                     <label>
                         <p>Email<span>*</span></p>
-                        <input value={form.email} name='email' onChange={inputOnChange} type="text" placeholder="Email của bạn" />
+                        <input value={form.email} name='email' onChange={inputChange} type="text" placeholder="Email của bạn" />
                         {
                             error.email && <p className="error-text">{error.email} </p>
                         }
                     </label>
                     <label>
                         <p>Website</p>
-                        <input value={form.website} name='website' onChange={inputOnChange} type="text" placeholder="Đường dẫn website http://" />
+                        <input value={form.website} name='website' onChange={inputChange} type="text" placeholder="Đường dẫn website http://" />
                         {
                             error.website && <p className="error-text">{error.website} </p>
                         }
                     </label>
                     <label>
                         <p>Tiêu đề<span>*</span></p>
-                        <input value={form.title} name='title' onChange={inputOnChange} type="text" placeholder="Tiêu đề liên hệ" />
+                        <input value={form.title} name='title' onChange={inputChange} type="text" placeholder="Tiêu đề liên hệ" />
                         {
                             error.title && <p className="error-text">{error.title} </p>
                         }
                     </label>
                     <label>
                         <p>Nội dung<span>*</span></p>
-                        <textarea value={form.content} name='content' onChange={inputOnChange} id cols={30} rows={10} defaultValue={""} />
+                        <textarea value={form.content} name='content' onChange={inputChange} id cols={30} rows={10} defaultValue={""} />
                         {
                             error.content && <p className="error-text">{error.content} </p>
                         }

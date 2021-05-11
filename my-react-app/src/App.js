@@ -19,6 +19,7 @@ import Project from './page/project'
 import Profile from './page/profile'
 import PopupLogin from './component/PopupLogin'
 import CourseList from './page/home/component/CourseList'
+import Register from './page/register';
 
 
 
@@ -29,8 +30,8 @@ function App() {
     <BrowserRouter>
       <div className="App">
 
-        <Header></Header>
-        <Nav></Nav>
+        <Header />
+        <Nav />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path="/ca-nhan" component={Profile} />
@@ -40,11 +41,12 @@ function App() {
           <Route path="/team" component={Team} />
           <Route path='/du-an' component={Project} />
           <Route path='/khoa-hoc' component={CourseList} />
+          <Route path='/dang-ki' component={Register} />
           <Route component={Page404} />
 
         </Switch>
 
-        <Footer></Footer>
+        <Footer />
       </div>
     </BrowserRouter>
 

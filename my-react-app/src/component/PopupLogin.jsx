@@ -44,6 +44,6 @@ export default function PopupLogin() {
                 </div>
             </div>
         </div>,
-        document.body
+        document.getElementById('root2')
     )
 }

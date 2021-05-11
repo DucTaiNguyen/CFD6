@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export function CourseItem({ name, image, description, teacher_avatar, teacher_name, status }) {
     return (
         <div className="col-md-4 course gray">
@@ -41,7 +43,7 @@ export function CourseItem({ name, image, description, teacher_avatar, teacher_n
                         </div>
                         <div className="name">{teacher_name}</div>
                     </div>
-                    <div className="register-btn">Đăng Ký</div>
+                    <Link to='/dang-ki'>   <div className="register-btn">Đăng Ký</div> </Link>
                 </div>
             </div>
         </div>

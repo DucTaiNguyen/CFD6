@@ -17,7 +17,7 @@ export function Header() {
                     </div>
                     <span className="text">menu</span>
                 </div>
-                <Link to="/" className="logo">
+                <Link to="/ca-nhan" className="logo">
                     <img src="img/logo.svg" alt="" />
                     <h1>CFD</h1>
                 </Link>
@@ -34,15 +34,15 @@ export function Header() {
                         <div className="hamberger">
                         </div>
                         <div className="sub">
-                            <Link to="#">Khóa học của tôi</Link>
+                            <Link to="/khoa-hoc">Khóa học của tôi</Link>
                             <Link to="#">Thông tin tài khoản</Link>
                             <Link to="#">Đăng xuất</Link>
                         </div>
                     </div>
-                    {/* <div class="not-login bg-none">
-                    <a href="#" class="btn-register">Đăng nhập</a>
-                    <a href="login.html" class="btn main btn-open-login">Đăng ký</a>
-                </div> */}
+                    <div class="not-login bg-none">
+                        <Link to="#" class="btn-register">Đăng nhập</Link>
+                        <Link to="/dang-ki" class="btn main btn-open-login">Đăng ký</Link>
+                    </div>
                 </div>
             </div>
         </header>
