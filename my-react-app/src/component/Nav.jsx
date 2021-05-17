@@ -23,7 +23,7 @@ export const Nav = () => {
                         <Link onClick={delayLink} to="/team">CFD Team</Link>
                     </li>
                     <li>
-                        <Link onClick={delayLink} to="/khoa-hoc">Khóa Học</Link>
+                        <Link onClick={delayLink} to="/khoa-hoc/:slug">Khóa Học</Link>
                     </li>
                     <li>
                         <Link onClick={delayLink} to="/du-an">Dự Án</Link>

@@ -1,23 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Info from './component/Info'
 import MyCourse from './component/MyCourse'
 import Project from './component/Project'
 import Payment from './component/Payment'
 import Coin from './component/Coin'
 import { Link, NavLink, Redirect, Route, Switch, useRouteMatch } from 'react-router-dom'
+import TopInfo from '../../component/TopInfo'
+import useAuth from '../../hook/useAuth'
 
-
-export default function Profile() {
-    let [tabActive, setTabActive] = useState(0);
+export default function Profile({ }) {
+    // let [tabActive, setTabActive] = useState(0);
 
     let { path } = useRouteMatch()
     console.log(path)
-    function setTab(e, index) {
+    let { login } = useAuth()
+    if (!login) return <Redirect path='/' />
 
-        e.preventDefault();
-        setTabActive(index)
 
-    }
+
+    // function setTab(e, index) {
+
+    //     e.preventDefault();
+    //     setTabActive(index)
+
+    // }
 
     // let login = true
     // if (!login) return <Redirect path="/" />
@@ -25,15 +31,7 @@ export default function Profile() {
     return (
         <main className="profile" id="main">
             <section>
-                <div className="top-info">
-                    <div className="avatar">
-                        {/* <span class="text">H</span> */}
-                        <img src="img/avatar-lg.png" alt="" />
-                        <div className="camera" />
-                    </div>
-                    <div className="name">trần nghĩa</div>
-                    <p className="des">Thành viên của team CFD1-OFFLINE</p>
-                </div>
+                <TopInfo />
                 <div className="container">
                     <div className="tab">
                         <div className="tab-title">

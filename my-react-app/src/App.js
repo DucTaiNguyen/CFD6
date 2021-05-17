@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import './assets/style/custom.scss'
 import {
   BrowserRouter,
@@ -20,36 +20,131 @@ import Profile from './page/profile'
 import PopupLogin from './component/PopupLogin'
 import CourseList from './page/home/component/CourseList'
 import Register from './page/register';
+import PrivateRoute from './component/PrivateRoute';
+import Auth from './service/auth'
 
 
+Auth.update({
+  name: "DTV"
+}).then(res => {
 
+})
+
+
+export let Context = React.createContext({})
 
 
 function App() {
+
+
+  let [state, setState] = useState({
+    login: JSON.parse(localStorage.getItem('login'))
+  })
+
+  useEffect(() => {
+    localStorage.setItem('login', JSON.stringify(state.login))
+  }, [state.login])
+
+  async function handleLogin(username, password) {
+
+    try {
+      let res = await Auth.login({ username, password })
+
+      if (res.data) {
+        setState({
+          ...state,
+          login: res.data
+        })
+        return {
+          success: true
+        }
+      } else if (res.error) {
+        return {
+          error: res.error
+        }
+      }
+    } catch (err) {
+
+    }
+  }
+
+  // .then((res) => {
+  //   return res.json()
+  // })
+  //   .then((res) => {
+
+  //     if (res.data) {
+  //       setState({
+  //         ...state,
+  //         login: res.data
+  //       })
+  //       callback()
+  //     } else if (res.error) {
+  //       setState({
+  //         ...state,
+  //         loginError: res.error
+  //       })
+  //     }
+
+  //   })
+  //   .catch(err => {
+  //     console.log('error', err)
+  //   })
+
+
+
+
+
+
+  // if (username === 'admin@gmail.com' && password === '123456') {
+  //   setState({
+  //     ...state,
+  //     login: {
+  //       name: "Dang Thuyen Vuong",
+  //       avatar: '/img/avt.png'
+  //     }
+  //   })
+
+  // } else {
+  //   return 'Sai thong tin dang nhap'
+  // }
+  // }
+
+  function handleLogout() {
+    setState({
+      ...state,
+      login: false
+    })
+
+
+  }
   return (
-    <BrowserRouter>
-      <div className="App">
+    <Context.Provider value={{ ...state, handleLogin, handleLogout }}>
+      <BrowserRouter>
+        <div className="App">
 
-        <Header />
-        <Nav />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path="/ca-nhan" component={Profile} />
-          <Route path="/lien-he" component={Contact} />
-          <Route path="/cau-hoi-thuong-gap" component={FAQ} />
-          <Route path="/khoa-hoc/:slug" component={ChiTietKhoaHoc} />
-          <Route path="/team" component={Team} />
-          <Route path='/du-an' component={Project} />
-          <Route path='/khoa-hoc' component={CourseList} />
-          <Route path='/dang-ki' component={Register} />
-          <Route component={Page404} />
+          <Header />
+          <Nav />
+          <PopupLogin />
+          <Switch>
+            <Route exact path='/' component={Home} />
 
-        </Switch>
+            <PrivateRoute path="/ca-nhan" component={Profile} />
+            <Route path="/lien-he" component={Contact} />
+            <Route path="/cau-hoi-thuong-gap" component={FAQ} />
+            <Route path="/khoa-hoc/:slug" component={ChiTietKhoaHoc} />
+            <Route path="/team" component={Team} />
+            <Route path='/du-an' component={Project} />
+            <Route path='/khoa-hoc' component={CourseList} />
+            <Route path='/dang-ki' component={Register} />
+            <Route component={Page404} />
 
-        <Footer />
-      </div>
-    </BrowserRouter>
+          </Switch>
 
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </Context.Provider>
   );
 }
 

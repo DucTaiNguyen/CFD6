@@ -1,7 +1,7 @@
 import React from "react";
 import { CourseItem } from "../../../component";
 
-export default function CourseList() {
+export default function CourseList({ online, offline }) {
     return (
         <React.Fragment>
             <section className="section-courseoffline">
@@ -15,54 +15,12 @@ export default function CourseList() {
                         <h2 className="main-title">Khóa học Offline</h2>
                     </div>
                     <div className="list row">
-                        <CourseItem
-                            name="ReactJS + redux"
-                            image="img/img1.png"
-                            description="Nếu bạn đã có kiến thức cơ bản về lập trình website responsive hoặc đã học qua khóa CFD Căn Bản. Bạn muốn nâng cao kiến thức và có nhiều cơ hội để ứng tuyển hơn vào vị trí Front-End Developer thì React Js chính là thư viện javascript được quan tâm nhất hiện nay."
-                            teacher_avatar="img/avt.png"
-                            teacher_name="Vương Đặng"
-                            status="sap-bat-dau"
-                        />
-                        <CourseItem
-                            name="ReactJS + redux"
-                            image="img/img1.png"
-                            description="Nếu bạn đã có kiến thức cơ bản về lập trình website responsive hoặc đã học qua khóa CFD Căn Bản. Bạn muốn nâng cao kiến thức và có nhiều cơ hội để ứng tuyển hơn vào vị trí Front-End Developer thì React Js chính là thư viện javascript được quan tâm nhất hiện nay."
-                            teacher_avatar="img/avt.png"
-                            teacher_name="Vương Đặng"
-                            status="da-ket-thuc"
-                        />
-                        <CourseItem
-                            name="ReactJS + redux"
-                            image="img/img1.png"
-                            description="Nếu bạn đã có kiến thức cơ bản về lập trình website responsive hoặc đã học qua khóa CFD Căn Bản. Bạn muốn nâng cao kiến thức và có nhiều cơ hội để ứng tuyển hơn vào vị trí Front-End Developer thì React Js chính là thư viện javascript được quan tâm nhất hiện nay."
-                            teacher_avatar="img/avt.png"
-                            teacher_name="Vương Đặng"
-                            status="dang-dien-ra"
-                        />
-                        <CourseItem
-                            name="ReactJS + redux"
-                            image="img/img1.png"
-                            description="Nếu bạn đã có kiến thức cơ bản về lập trình website responsive hoặc đã học qua khóa CFD Căn Bản. Bạn muốn nâng cao kiến thức và có nhiều cơ hội để ứng tuyển hơn vào vị trí Front-End Developer thì React Js chính là thư viện javascript được quan tâm nhất hiện nay."
-                            teacher_avatar="img/avt.png"
-                            teacher_name="Vương Đặng"
-                            status="sap-bat-dau"
-                        />
-                        <CourseItem
-                            name="ReactJS + redux"
-                            image="img/img1.png"
-                            description="Nếu bạn đã có kiến thức cơ bản về lập trình website responsive hoặc đã học qua khóa CFD Căn Bản. Bạn muốn nâng cao kiến thức và có nhiều cơ hội để ứng tuyển hơn vào vị trí Front-End Developer thì React Js chính là thư viện javascript được quan tâm nhất hiện nay."
-                            teacher_avatar="img/avt.png"
-                            teacher_name="Vương Đặng"
-                            status="sap-bat-dau"
-                        />
-                        <CourseItem
-                            name="ReactJS + redux"
-                            image="img/img1.png"
-                            description="Nếu bạn đã có kiến thức cơ bản về lập trình website responsive hoặc đã học qua khóa CFD Căn Bản. Bạn muốn nâng cao kiến thức và có nhiều cơ hội để ứng tuyển hơn vào vị trí Front-End Developer thì React Js chính là thư viện javascript được quan tâm nhất hiện nay."
-                            teacher_avatar="img/avt.png"
-                            teacher_name="Vương Đặng"
-                            status="sap-bat-dau"
-                        />
+                        {
+                            offline.map((value, i) => <CourseItem
+                                key={value.slug}
+                                {...value}
+                            />)
+                        }
                     </div>
                 </div>
             </section>
@@ -72,54 +30,12 @@ export default function CourseList() {
                         <h2 className="main-title">Khóa học Online</h2>
                     </div>
                     <div className="list row">
-                        <CourseItem
-                            name="ReactJS + redux"
-                            image="img/img1.png"
-                            description="Nếu bạn đã có kiến thức cơ bản về lập trình website responsive hoặc đã học qua khóa CFD Căn Bản. Bạn muốn nâng cao kiến thức và có nhiều cơ hội để ứng tuyển hơn vào vị trí Front-End Developer thì React Js chính là thư viện javascript được quan tâm nhất hiện nay."
-                            teacher_avatar="img/avt.png"
-                            teacher_name="Vương Đặng"
-                            status="sap-bat-dau"
-                        />
-                        <CourseItem
-                            name="ReactJS + redux"
-                            image="img/img1.png"
-                            description="Nếu bạn đã có kiến thức cơ bản về lập trình website responsive hoặc đã học qua khóa CFD Căn Bản. Bạn muốn nâng cao kiến thức và có nhiều cơ hội để ứng tuyển hơn vào vị trí Front-End Developer thì React Js chính là thư viện javascript được quan tâm nhất hiện nay."
-                            teacher_avatar="img/avt.png"
-                            teacher_name="Vương Đặng"
-                            status="da-ket-thuc"
-                        />
-                        <CourseItem
-                            name="ReactJS + redux"
-                            image="img/img1.png"
-                            description="Nếu bạn đã có kiến thức cơ bản về lập trình website responsive hoặc đã học qua khóa CFD Căn Bản. Bạn muốn nâng cao kiến thức và có nhiều cơ hội để ứng tuyển hơn vào vị trí Front-End Developer thì React Js chính là thư viện javascript được quan tâm nhất hiện nay."
-                            teacher_avatar="img/avt.png"
-                            teacher_name="Vương Đặng"
-                            status="da-ket-thuc"
-                        />
-                        <CourseItem
-                            name="ReactJS + redux"
-                            image="img/img1.png"
-                            description="Nếu bạn đã có kiến thức cơ bản về lập trình website responsive hoặc đã học qua khóa CFD Căn Bản. Bạn muốn nâng cao kiến thức và có nhiều cơ hội để ứng tuyển hơn vào vị trí Front-End Developer thì React Js chính là thư viện javascript được quan tâm nhất hiện nay."
-                            teacher_avatar="img/avt.png"
-                            teacher_name="Vương Đặng"
-                            status="sap-bat-dau"
-                        />
-                        <CourseItem
-                            name="ReactJS + redux"
-                            image="img/img1.png"
-                            description="Nếu bạn đã có kiến thức cơ bản về lập trình website responsive hoặc đã học qua khóa CFD Căn Bản. Bạn muốn nâng cao kiến thức và có nhiều cơ hội để ứng tuyển hơn vào vị trí Front-End Developer thì React Js chính là thư viện javascript được quan tâm nhất hiện nay."
-                            teacher_avatar="img/avt.png"
-                            teacher_name="Vương Đặng"
-                            status="da-ket-thuc"
-                        />
-                        <CourseItem
-                            name="ReactJS + redux"
-                            image="img/img1.png"
-                            description="Nếu bạn đã có kiến thức cơ bản về lập trình website responsive hoặc đã học qua khóa CFD Căn Bản. Bạn muốn nâng cao kiến thức và có nhiều cơ hội để ứng tuyển hơn vào vị trí Front-End Developer thì React Js chính là thư viện javascript được quan tâm nhất hiện nay."
-                            teacher_avatar="img/avt.png"
-                            teacher_name="Vương Đặng"
-                            status="dang-dien-ra"
-                        />
+                        {
+                            online.map((value, i) => <CourseItem
+                                key={value.slug}
+                                {...value}
+                            />)
+                        }
 
 
                     </div>
