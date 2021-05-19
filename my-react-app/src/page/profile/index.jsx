@@ -7,13 +7,23 @@ import Coin from './component/Coin'
 import { Link, NavLink, Redirect, Route, Switch, useRouteMatch } from 'react-router-dom'
 import TopInfo from '../../component/TopInfo'
 import useAuth from '../../hook/useAuth'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginAction } from '../../redux/actions/authAction'
 
 export default function Profile({ children }) {
     // let [tabActive, setTabActive] = useState(0);
 
     let { path } = useRouteMatch()
     console.log(path)
-    let { login } = useAuth()
+    // let dispatch = useDispatch()
+
+    // dispatch(loginAction({
+    //     username: form.username,
+    //     password: form.password
+    // }, close))
+    let { login } = useSelector(store => store.auth)
+
+    // let { login } = useAuth()
     if (!login) return <Redirect path='/' />
 
 

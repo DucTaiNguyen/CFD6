@@ -10,6 +10,7 @@ const Auth = {
             }
         }).then(res => res.json())
     },
+
     register() {
 
     },

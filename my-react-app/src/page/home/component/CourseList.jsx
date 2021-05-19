@@ -1,7 +1,26 @@
 import React from "react";
 import { CourseItem } from "../../../component";
 
-export default function CourseList({ online, offline }) {
+import { useState, useEffect } from "react";
+import CourseApi from "../../../service/course"
+export default function CourseList() {
+
+    let [list, setList] = useState({
+        offline: [],
+        online: []
+    })
+    useEffect(async () => {
+        let res = await CourseApi.list()
+        if (res) {
+
+            setList({
+                ...list,
+                online: res.online,
+                offline: res.offline
+            })
+        }
+    }, [])
+    console.log("nguyenan", list)
     return (
         <React.Fragment>
             <section className="section-courseoffline">
@@ -16,8 +35,9 @@ export default function CourseList({ online, offline }) {
                     </div>
                     <div className="list row">
                         {
-                            offline.map((value, i) => <CourseItem
+                            list.offline?.map((value, i) => <CourseItem
                                 key={value.slug}
+
                                 {...value}
                             />)
                         }
@@ -31,10 +51,12 @@ export default function CourseList({ online, offline }) {
                     </div>
                     <div className="list row">
                         {
-                            online.map((value, i) => <CourseItem
+                            list.online?.map((value, i) => <CourseItem
                                 key={value.slug}
+
                                 {...value}
                             />)
+
                         }
 
 

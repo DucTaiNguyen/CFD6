@@ -55,8 +55,8 @@ export function Header() {
                                 <div className="hamberger">
                                 </div>
                                 <div className="sub">
-                                    <Link to="/ca-nhan">Khóa học của tôi</Link>
-                                    <Link to="#">Thông tin tài khoản</Link>
+                                    <Link to="/ca-nhan/khoa-hoc-cua-ban">Khóa học của tôi</Link>
+                                    <Link to="/ca-nhan">Thông tin tài khoản</Link>
                                     <Link to="#" onClick={logout}  >Đăng xuất</Link>
                                 </div>
                             </div>

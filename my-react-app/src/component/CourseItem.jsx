@@ -4,7 +4,7 @@ export function CourseItem({ title, short_description, thumbnail, teacher, cours
     return (
         <div className="col-md-4 course gray">
             <div className="wrap">
-                <Link className="cover" to={`/khoa-hoc/${slug}`}>
+                <Link className="cover" to={`/chi-tiet-khoa-hoc/${slug}`}>
                     <img src={thumbnail.link} alt="" />
                     {
                         course_status === "da-ket-thuc" ? <span className="badge b1">Đã kết thúc</span> :

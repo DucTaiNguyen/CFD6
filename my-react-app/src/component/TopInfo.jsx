@@ -1,10 +1,13 @@
 import { useContext } from 'react'
+import { useSelector } from 'react-redux'
 import useAuth from '../hook/useAuth'
+import auth from '../redux/reducer/authReducer'
 
 
 export default function TopInfo({ }) {
 
-    let { login } = useAuth()
+    // let { login } = useAuth()
+    let { login } = useSelector(store => store.auth)
     return (<div className="top-info">
         <div className="avatar">
             {/* <span class="text">H</span> */}

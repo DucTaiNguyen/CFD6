@@ -31,6 +31,16 @@ let routers = [
                 exact: true
             },
             {
+                component: CourseList,
+                path: '/khoa-hoc',
+                exact: true
+            },
+            {
+                component: ChiTietKhoaHoc,
+                path: `/chi-tiet-khoa-hoc`,
+
+            },
+            {
                 component: Contact,
                 path: '/lien-he',
                 exact: true
@@ -58,7 +68,7 @@ let routers = [
                     },
                     {
                         component: MyCourse,
-                        path: 'khoa-hoc-cua-ban'
+                        path: '/khoa-hoc-cua-ban'
                     },
                     {
                         component: Coin,

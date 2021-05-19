@@ -50,28 +50,28 @@ function App() {
     localStorage.setItem('login', JSON.stringify(state.login))
   }, [state.login])
 
-  async function handleLogin(username, password) {
+  // async function handleLogin(username, password) {
 
-    try {
-      let res = await Auth.login({ username, password })
+  //   try {
+  //     let res = await Auth.login({ username, password })
 
-      if (res.data) {
-        setState({
-          ...state,
-          login: res.data
-        })
-        return {
-          success: true
-        }
-      } else if (res.error) {
-        return {
-          error: res.error
-        }
-      }
-    } catch (err) {
+  //     if (res.data) {
+  //       setState({
+  //         ...state,
+  //         login: res.data
+  //       })
+  //       return {
+  //         success: true
+  //       }
+  //     } else if (res.error) {
+  //       return {
+  //         error: res.error
+  //       }
+  //     }
+  //   } catch (err) {
 
-    }
-  }
+  //   }
+  // }
 
   // .then((res) => {
   //   return res.json()
@@ -115,19 +115,19 @@ function App() {
   // }
   // }
 
-  function handleLogout() {
-    setState({
-      ...state,
-      login: false
-    })
+  // function handleLogout() {
+  //   setState({
+  //     ...state,
+  //     login: false
+  //   })
 
 
-  }
+  // }
   return (
     <Provider store={store}>
-      <Context.Provider value={{ ...state, handleLogin, handleLogout }}>
-        <BrowserRouter>
-          {/* <div className="App">
+      {/* <Context.Provider value={{ ...state, handleLogin, handleLogout }}> */}
+      <BrowserRouter>
+        {/* <div className="App">
 
           <Header />
           <Nav />
@@ -151,9 +151,9 @@ function App() {
 
           <Footer />
         </div> */}
-          {routerConfig(routers)}
-        </BrowserRouter>
-      </Context.Provider>
+        {routerConfig(routers)}
+      </BrowserRouter>
+      {/* </Context.Provider> */}
     </Provider>
   );
 }

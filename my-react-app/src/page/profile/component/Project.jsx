@@ -44,7 +44,7 @@ export default function Project() {
                         <div className="bottom">
                             <div className="teacher">
                                 <div className="avatar">
-                                    <img src="img/avt.png" alt="" />
+                                    <img src="/img/avt.png" alt="" />
                                 </div>
                                 <div className="name">Trần Nghĩa</div>
                             </div>

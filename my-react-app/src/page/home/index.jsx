@@ -2,6 +2,7 @@
 // import { CourseItem } from "../../component";
 import { useEffect, useState } from "react";
 import CourseApi from "../../service/course";
+import HomeApi from "../../service/home";
 import Banner from "./component/Banner";
 import CourseList from "./component/CourseList";
 import Different from "./component/Different";
@@ -14,13 +15,12 @@ export default function Home() {
         online: []
     })
     useEffect(async () => {
-        let res = await CourseApi.list()
+        let res = await HomeApi.list()
         setList(res)
     }, [])
-
     return (<main className="homepage" id="main">
         <Banner />
-        <CourseList {...list} />
+        <CourseList />
         <Different />
         <Testimonial />
         <Gallery />
