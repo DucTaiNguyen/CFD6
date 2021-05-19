@@ -8,7 +8,7 @@ import { Link, NavLink, Redirect, Route, Switch, useRouteMatch } from 'react-rou
 import TopInfo from '../../component/TopInfo'
 import useAuth from '../../hook/useAuth'
 
-export default function Profile({ }) {
+export default function Profile({ children }) {
     // let [tabActive, setTabActive] = useState(0);
 
     let { path } = useRouteMatch()
@@ -42,7 +42,10 @@ export default function Profile({ }) {
                             <NavLink to={`${path}/coin`}>Quản lý COIN của tôi </NavLink>
                         </div>
                         <div className="tab-content">
-                            <Switch>
+                            {
+                                children
+                            }
+                            {/* <Switch>
 
                                 <Route path={`${path}/khoa-hoc-cua-ban`} component={MyCourse} />
                                 <Route path={`${path}/du-an`} component={Project} />
@@ -50,7 +53,7 @@ export default function Profile({ }) {
                                 <Route path={`${path}/coin`} component={Coin} />
                                 <Route component={Info} />
 
-                            </Switch>
+                            </Switch> */}
                         </div>
                     </div>
                 </div>

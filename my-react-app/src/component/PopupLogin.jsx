@@ -2,9 +2,14 @@ import React, { useContext, useState } from 'react'
 import reactDom from 'react-dom'
 import useAuth from '../hook/useAuth'
 import useFormValidate from '../hook/useFormValidate'
+import { useSelector, useDispatch } from 'react-redux'
+import store from '../redux'
+import Auth from '../service/auth'
+import { loginAction } from '../redux/actions/authAction'
+
 export default function PopupLogin() {
 
-    let [loginError, setLoginError] = useState(null)
+    // let [loginError, setLoginError] = useState(null)
     let { inputChange, check, error, form } = useFormValidate({
         username: '',
         password: ''
@@ -22,24 +27,56 @@ export default function PopupLogin() {
         }
     })
 
-    let { handleLogin } = useAuth()
+
+
+    let dispatch = useDispatch()
+    // let { handleLogin } = useAuth()
     function close() {
         document.querySelector('.popup-login').style.display = 'none'
     }
 
+
+    let { loginError } = useSelector(store => store.auth)
+
     async function loginHandle() {
         let error = check()
         if (Object.keys(error).length === 0) {
-            let res = await handleLogin(form.username, form.password)
+            // let res = await Auth.login({
+            //     username: form.username,
+            //     password: form.password
 
-            if (res.success) {
-                close()
-            } else if (res.error) {
-                setLoginError(res.error)
-            }
+            // })
+
+
+
+
+            dispatch(loginAction({
+                username: form.username,
+                password: form.password
+            }, close))
+
+            // if (res.data) {
+
+            // dispatch({
+            //     type: "LOGIN",
+            //     payload: res.data
+            // })
+            //     dispatch(loginAction(res.data))
+            //     close()
+            // } else if (res.error) {
+            //     setLoginError(res.error)
+            // }
+            // if (res.success) {
+            //     close()
+            // } else if (res.error) {
+            //     setLoginError(res.error)
+            // }
 
         }
     }
+
+    let st = useSelector(store => store)
+    console.log(st)
     return reactDom.createPortal(
         <div className="popup-form popup-login" style={{ display: 'none' }}>
             <div className="wrap">

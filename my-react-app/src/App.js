@@ -23,12 +23,17 @@ import Register from './page/register';
 import PrivateRoute from './component/PrivateRoute';
 import Auth from './service/auth'
 
+import { routerConfig } from './core'
+import routers from './routers'
 
-Auth.update({
-  name: "DTV"
-}).then(res => {
+import { Provider } from 'react-redux'
+import store from './redux'
 
-})
+// Auth.update({
+//   name: "DTV"
+// }).then(res => {
+
+// })
 
 
 export let Context = React.createContext({})
@@ -119,9 +124,10 @@ function App() {
 
   }
   return (
-    <Context.Provider value={{ ...state, handleLogin, handleLogout }}>
-      <BrowserRouter>
-        <div className="App">
+    <Provider store={store}>
+      <Context.Provider value={{ ...state, handleLogin, handleLogout }}>
+        <BrowserRouter>
+          {/* <div className="App">
 
           <Header />
           <Nav />
@@ -141,10 +147,14 @@ function App() {
 
           </Switch>
 
+         
+
           <Footer />
-        </div>
-      </BrowserRouter>
-    </Context.Provider>
+        </div> */}
+          {routerConfig(routers)}
+        </BrowserRouter>
+      </Context.Provider>
+    </Provider>
   );
 }
 

@@ -2,6 +2,8 @@ import { useContext, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
 import useAuth from '../hook/useAuth'
+import { useDispatch, useSelector } from 'react-redux'
+import { logoutAction } from '../redux/actions/authAction'
 
 
 
@@ -10,14 +12,19 @@ export function Header() {
         document.body.classList.toggle('menu-is-show')
     }
 
+    let dispatch = useDispatch()
+    let { login } = useSelector(store => store.auth)
 
-
-    let { login, handleLogout } = useAuth()
+    // let { login, handleLogout } = useAuth()
 
     function popupLogin() {
         document.querySelector('.popup-login').style.display = 'flex'
     }
 
+    function logout(e) {
+        e.preventDefault()
+        dispatch(logoutAction())
+    }
     return (
         <header id="header">
             <div className="wrap">
@@ -48,9 +55,9 @@ export function Header() {
                                 <div className="hamberger">
                                 </div>
                                 <div className="sub">
-                                    <Link to="/khoa-hoc">Khóa học của tôi</Link>
+                                    <Link to="/ca-nhan">Khóa học của tôi</Link>
                                     <Link to="#">Thông tin tài khoản</Link>
-                                    <Link to="#" onClick={e => { e.preventDefault(); handleLogout() }}   >Đăng xuất</Link>
+                                    <Link to="#" onClick={logout}  >Đăng xuất</Link>
                                 </div>
                             </div>
                             :
