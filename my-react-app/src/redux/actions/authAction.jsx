@@ -17,7 +17,11 @@ export function loginAction(data, success) {
         }
     }
 }
-
+export function updateAction(data) {
+    return async (dispatch) => {
+        let res = await Auth.update(data)
+    }
+}
 export function logoutAction() {
     return {
         type: LOGOUT

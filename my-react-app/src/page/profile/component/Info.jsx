@@ -1,10 +1,14 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import useFormValidate from '../../../hook/useFormValidate';
+import store from '../../../redux';
+import { updateAction } from '../../../redux/actions/authAction';
 
 export default function Info() {
+    let { login } = useSelector(store => store.auth)
     let { form, error, inputChange, check } = useFormValidate({
-        name: '',
-        phone: '',
+        name: login.name,
+        phone: "",
         email: '',
         fb: '',
         title: '',
@@ -52,11 +56,11 @@ export default function Info() {
         }
     })
 
-
+    let dispatch = useDispatch()
     function onSubmit() {
         let errorObj = check();
         if (Object.keys(errorObj).length === 0) {
-            console.log(form)
+            dispatch(updateAction(form))
         }
 
     }
@@ -72,27 +76,27 @@ export default function Info() {
             </label>
             <label>
                 <p>Số điện thoại<span>*</span></p>
-                {/* <input type="text" placeholder="0949******" /> */}
-                <input value={form.phone} name='phone' onChange={inputChange} type="text" placeholder="Số điện thoại" />
+                <input type="text" placeholder="0949******" />
+                {/* <input value={form.phone} name='phone' onChange={inputChange} type="text" placeholder="Số điện thoại" />
                 {
                     error.phone && <p className="error-text">{error.phone} </p>
-                }
+                } */}
             </label>
             <label>
                 <p>Email<span>*</span></p>
-                {/* <input defaultValue="vuong.dang@dna.vn" disabled type="text" /> */}
-                <input value={form.email} name='email' onChange={inputChange} type="text" placeholder="Email của bạn" />
+                <input value={login.email} defaultValue="vuong.dang@dna.vn" disabled type="text" />
+                {/* <input value={login.email} name='email' onChange={inputChange} type="text" placeholder="Email của bạn" />
                 {
                     error.email && <p className="error-text">{error.email} </p>
-                }
+                } */}
             </label>
             <label>
                 <p>Facebook<span>*</span></p>
-                {/* <input type="text" placeholder="Facebook url" /> */}
-                <input value={form.fb} name='email' onChange={inputChange} type="text" placeholder="Facebook của bạn" />
+                <input type="text" placeholder="Facebook url" />
+                {/* <input value={form.fb} name='email' onChange={inputChange} type="text" placeholder="Facebook của bạn" />
                 {
                     error.fb && <p className="error-text">{error.fb} </p>
-                }
+                } */}
             </label>
             <label>
                 <p>Skype<span>*</span></p>
