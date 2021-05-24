@@ -18,6 +18,7 @@ import Project from './page/profile/component/Project'
 import Payment from './page/profile/component/Payment'
 import Coin from './page/profile/component/Coin'
 import MyCourse from './page/profile/component/MyCourse'
+import Register from './page/register'
 let routers = [
 
 
@@ -33,6 +34,11 @@ let routers = [
             {
                 component: CourseList,
                 path: '/khoa-hoc',
+                exact: true
+            },
+            {
+                component: Register,
+                path: '/dang-ki',
                 exact: true
             },
             {

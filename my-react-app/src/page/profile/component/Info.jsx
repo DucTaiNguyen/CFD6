@@ -9,7 +9,7 @@ export default function Info() {
     let { form, error, inputChange, check } = useFormValidate({
         name: login.name,
         phone: "",
-        email: '',
+        // email: login.email,
         fb: '',
         title: '',
         content: ''
@@ -19,24 +19,24 @@ export default function Info() {
                 required: true
             },
             phone: {
-                required: true,
+                // required: true,
                 pattern: 'phone'
             },
             email: {
-                required: true,
+                // required: true,
                 pattern: 'email'
             },
             fb: {
-                required: true,
+                // required: true,
 
                 pattern: /^https?:\/\/www\.facebook\.com.*\/(video(s)?|watch|story)(\.php?|\/).+$/i
             },
             title: {
-                required: true,
+                // required: true,
 
             },
             content: {
-                required: true,
+                // required: true,
                 // pattern: 'content'
             }
 
@@ -84,7 +84,7 @@ export default function Info() {
             </label>
             <label>
                 <p>Email<span>*</span></p>
-                <input value={login.email} defaultValue="vuong.dang@dna.vn" disabled type="text" />
+                <input value={login.email} disabled type="text" />
                 {/* <input value={login.email} name='email' onChange={inputChange} type="text" placeholder="Email của bạn" />
                 {
                     error.email && <p className="error-text">{error.email} </p>

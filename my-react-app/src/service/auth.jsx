@@ -3,6 +3,7 @@ import { endpoint } from './config'
 const Auth = {
     async refreshToken() {
         let refreshToken = JSON.parse(localStorage.getItem('login'))?.token?.refreshToken
+        console.log(refreshToken)
         let res = await fetch(`${endpoint}/elearning/v4/refresh-token`, {
             method: 'POST',
             body: JSON.stringify({
@@ -31,20 +32,17 @@ const Auth = {
 
     },
     async update(data) {
-        let token = JSON.parse(localStorage.getItem('login'))?.token?.accessToken
-        let res = await fetch(`${endpoint}/elearning/v4/profile/update`, {
+        let token = JSON.parse(localStorage.getItem('token'))?.accessToken
+        return fetch(`${endpoint}/elearning/v4/profile/update`, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
-        })
-        if (res.status === 200) {
-            return res.json()
-        }
-        if (res.status === 403) {
-            await Auth.refreshToken()
+        }).then(res => tokenHandle(res, () => {
+            let token = JSON.parse(localStorage.getItem('token'))?.accessToken
+
             return fetch(`${endpoint}/elearning/v4/profile/update`, {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -53,9 +51,22 @@ const Auth = {
                     'Authorization': `Bearer ${token}`
                 }
             }).then(res => res.json())
-        }
+        }))
+
 
     }
 }
 
+
+export async function tokenHandle(res, callback) {
+    if (res.status === 200) {
+        return res.json()
+    }
+    if (res.status === 403) {
+        await Auth.refreshToken()
+        let token = JSON.parse(localStorage.getItem('token'))?.accessToken
+        return callback()
+
+    }
+}
 export default Auth

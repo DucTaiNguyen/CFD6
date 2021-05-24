@@ -8,6 +8,7 @@ export default function TopInfo({ }) {
 
     // let { login } = useAuth()
     let { login } = useSelector(store => store.auth)
+    console.log(login.name)
     return (<div className="top-info">
         <div className="avatar">
             {/* <span class="text">H</span> */}
